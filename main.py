@@ -61,19 +61,20 @@ def user_input_transform(user_input):
   if user_input == "A3":
     conv_user_input = 3
   if user_input == "B1":
-    conv_user_input = 4
+    user_input = 4
   if user_input == "B2":
-   conv_user_input = 5
+   user_input = 5
   if user_input == "B3":
-    conv_user_input = 6
+    user_input = 6
   if user_input == "C1":
-    conv_user_input = 7
+    user_input = 7
   if user_input == "C2":
-    conv_user_input = 8
+    user_input = 8
   if user_input == "C3":
-    conv_user_input = 9
+    user_input = 9
   print(f'test {user_input}')
-  return
+  print(conv_user_input)
+  return conv_user_input
 
 def did_win(game_board,active_user):
     if check_win_row(game_board,active_user): return True
@@ -104,8 +105,9 @@ while counter < 9:
   user_input = input("Please enter a position A1 to A9 or enter \"q\" to quit: ")
   if quit(user_input):
     break
-  user_input_transform(user_input)
+  user_input = user_input_transform(user_input)
   print(conv_user_input)
+  user_input = conv_user_input
   print(user_input)
   if not check_input(user_input):
     print("Please try again.")
