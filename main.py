@@ -18,8 +18,8 @@ conv_user_input = 0
 
 def check_input(user_input):
   #check if A1 to A9
-  if not isnumber(user_input): return False
-  user_input= int(user_input)
+  # if not isnumber(user_input): return False
+  # user_input= int(user_input)
   if not check_boundary(user_input): return False
   return True
 
@@ -57,23 +57,22 @@ def user_input_transform(user_input):
   if user_input == 'A1':
     conv_user_input = 1
   if user_input == "A2":
-    conv_user_input = 2
+    conv_user_input = 4
   if user_input == "A3":
-    conv_user_input = 3
+    conv_user_input = 7
   if user_input == "B1":
-    user_input = 4
+    conv_user_input = 2
   if user_input == "B2":
-   user_input = 5
+    conv_user_input= 5
   if user_input == "B3":
-    user_input = 6
+    conv_user_input = 8
   if user_input == "C1":
-    user_input = 7
+    conv_user_input = 3
   if user_input == "C2":
-    user_input = 8
+    conv_user_input = 6
   if user_input == "C3":
-    user_input = 9
+    conv_user_input = 9
   print(f'test {user_input}')
-  print(conv_user_input)
   return conv_user_input
 
 def did_win(game_board,active_user):
@@ -105,14 +104,12 @@ while counter < 9:
   user_input = input("Please enter a position A1 to A9 or enter \"q\" to quit: ")
   if quit(user_input):
     break
-  user_input = user_input_transform(user_input)
-  print(conv_user_input)
-  user_input = conv_user_input
+  user_input = int(user_input_transform(user_input))
   print(user_input)
   if not check_input(user_input):
     print("Please try again.")
     continue
-  # user_input = int(user_input) - 1
+  user_input = int(user_input) - 1
   if istaken(user_input):
     print("Space already taken. Please try again.")
     continue
