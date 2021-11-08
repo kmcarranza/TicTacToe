@@ -18,8 +18,8 @@ conv_user_input = 0
 
 def check_input(user_input):
   #check if A1 to A9
-  # if not isnumber(user_input): return False
-  # user_input= int(user_input)
+  if not isnumber(user_input): return False
+  user_input= int(user_input)
   if not check_boundary(user_input): return False
   return True
 
@@ -54,6 +54,7 @@ def current_user(user):
   else: return "0"
 
 def user_input_transform(user_input):
+  conv_user_input = 0
   if user_input == 'A1':
     conv_user_input = 1
   if user_input == "A2":
@@ -72,7 +73,6 @@ def user_input_transform(user_input):
     conv_user_input = 6
   if user_input == "C3":
     conv_user_input = 9
-  print(f'test {user_input}')
   return conv_user_input
 
 def did_win(game_board,active_user):
@@ -105,10 +105,9 @@ while counter < 9:
   if quit(user_input):
     break
   user_input = int(user_input_transform(user_input))
-  print(user_input)
-  if not check_input(user_input):
-    print("Please try again.")
-    continue
+  # if not check_input(user_input):
+  #   print("Please try again.")
+  #   continue
   user_input = int(user_input) - 1
   if istaken(user_input):
     print("Space already taken. Please try again.")
@@ -117,7 +116,10 @@ while counter < 9:
   if did_win(game_board,active_user):
     display_board()
     print(f'Player {active_user} has won!')
-    break
+    user_input = input ('Do you want to play again ("y" or "n" ? ')
+    if user_input == "y":
+      counter = 0
+    else: break
   user = not user
   counter += 1
   if counter == 9:
