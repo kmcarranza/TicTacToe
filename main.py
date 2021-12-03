@@ -17,7 +17,7 @@ def display_board():
   print("3 "+ game_board[6] +" | "+game_board[7] +" | "+ game_board[8])
 
 def clear_board(game_board):
-  for i in range(game_board):
+  for i in range(len(game_board)):
     game_board[i] = "-"
   return game_board
 
@@ -146,7 +146,7 @@ while counter < 9:
     user_input = input ('Do you want to play again ("y" or "n") ? ')
     if user_input == "y":
       counter = 0
-      clear_board
+      clear_board(game_board)
     else: break
   user = not user
   counter += 1
