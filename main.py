@@ -2,6 +2,10 @@
 
 # Create Gameboard
 
+user = True 
+counter = 0
+conv_user_input = 0
+
 game_board = ["-","-","-",
               "-","-","-",
               "-","-","-"] 
@@ -12,9 +16,10 @@ def display_board():
   print("2 "+ game_board[3] +" | "+game_board[4] +" | "+ game_board[5])
   print("3 "+ game_board[6] +" | "+game_board[7] +" | "+ game_board[8])
 
-user = True 
-counter = 0
-conv_user_input = 0
+def clear_board(game_board):
+  for i in range(game_board):
+    game_board[i] = "-"
+  return game_board
 
 def check_input(user_input):
   #check if A1 to A9
@@ -76,26 +81,48 @@ def user_input_transform(user_input):
   return conv_user_input
 
 def did_win(game_board,active_user):
-    if check_win_row(game_board,active_user): return True
-    if check_win_col(game_board,active_user): return True
-    if check_diagonal(game_board,active_user): return True
+    if check_win_row(game_board,active_user): 
+      print('winrow')
+      return True
+    if check_win_col(game_board,active_user): 
+      print('wincolumn')
+      return True
+    if check_diagonal(game_board,active_user): 
+      print('win diagonal')
+      return True
     else:return False
 
 def check_win_row(game_board,active_user):
-    if game_board[0] == active_user and game_board[1] == active_user and game_board[2] == user: return True
-    if (game_board[3] and game_board[4] and game_board[5]) == active_user: return True
-    if (game_board[6] and game_board[7] and game_board[8]) == active_user: return True
-    else:return False
+    if (game_board[0] == active_user and game_board[1] == active_user and game_board[2] == user): 
+      print(5)
+      return True
+    if (game_board[3] == active_user and game_board[4] == active_user and game_board[5] == active_user): 
+      print(6)
+      return True
+    if (game_board[6] == active_user and game_board[7] == active_user and game_board[8] == active_user): 
+      print(7)
+      return True
+    else:
+      print(8)
+      return False
 
 def check_win_col(game_board,active_user):
-    if (game_board[0] and game_board[3] and game_board[7]) == active_user: return True
-    if (game_board[1] and game_board[4] and game_board[7]) == active_user: return True
-    if (game_board[2] and game_board[5] and game_board[8]) == active_user: return True
-    else:return False
+    if (game_board[0] == active_user and game_board[3] == active_user and game_board[6] == active_user): 
+      print(1)
+      return True
+    if (game_board[1] == active_user and game_board[4] == active_user and game_board[7] == active_user): 
+      print(2)
+      return True
+    if (game_board[2] == active_user and game_board[5] == active_user and game_board[8] == active_user): 
+      print(3)
+      return True
+    else:
+      print(4)
+      return False
 
 def check_diagonal(game_board,user):
-    if (game_board[0] and game_board[4] and game_board[8]) == active_user: return True
-    if (game_board[2] and game_board[4] and game_board[6]) == active_user: return True
+    if (game_board[0]  == active_user and game_board[4]  == active_user and game_board[8]  == active_user): return True
+    if (game_board[2]  == active_user and game_board[4]  == active_user and game_board[6]  == active_user): return True
     else: return False
 
 while counter < 9:
@@ -116,9 +143,10 @@ while counter < 9:
   if did_win(game_board,active_user):
     display_board()
     print(f'Player {active_user} has won!')
-    user_input = input ('Do you want to play again ("y" or "n" ? ')
+    user_input = input ('Do you want to play again ("y" or "n") ? ')
     if user_input == "y":
       counter = 0
+      clear_board
     else: break
   user = not user
   counter += 1
