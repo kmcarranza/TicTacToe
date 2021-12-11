@@ -51,9 +51,11 @@ def istaken(user_input):
     return True
   else: return False
 
-def update_board(user_input,active_user):
+def update_board(user_input,active_user,counter):
   game_board[user_input] = active_user
-
+  counter +=1
+  return counter 
+  
 def current_user(user):
   if user: return "x"
   else: return "0"
@@ -127,7 +129,7 @@ while counter < 9:
   if istaken(user_input):
     print("Space already taken. Please try again.")
     continue
-  update_board(user_input,active_user)
+  update_board(user_input,active_user,counter)
   if did_win(game_board,active_user):
     display_board()
     print(f'Player {active_user} has won!')
@@ -137,7 +139,6 @@ while counter < 9:
       clear_board(game_board)
     else: break
   user = not user
-  counter += 1
   if counter == 9:
     print('Tie!')
     user_input = input ('Do you want to play again ("y" or "n") ? ')
