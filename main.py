@@ -1,17 +1,16 @@
 # Tic Tac Toe Game
 
-# Create Gameboard
-
 user = True 
 counter = 0
 conv_user_input = 0
 conv_counter = 0
 
+# This is Creating the Gameboard
 game_board = ["-","-","-",
               "-","-","-",
               "-","-","-"] 
 
-# This will display board
+# This will display Gameboard
 def display_board():
   print('  A   B   C')
   print("1 "+ game_board[0] +" | "+game_board[1] +" | "+ game_board[2])
@@ -23,18 +22,6 @@ def clear_board(game_board):
   for i in range(len(game_board)):
     game_board[i] = "-"
   return game_board
-
-def check_input(user_input):
-  if not isnumber(user_input): return False
-  user_input= int(user_input)
-  if not check_boundary(user_input): return False
-  return True
-
-def isnumber(user_input):
-  if not user_input.isnumeric():
-    print("This is not a valid input.")
-    return False
-  else:return True 
 
 # Checks to make sure inputs are within range of board 
 def check_boundary(user_input):
@@ -52,23 +39,23 @@ def quit(user_input):
   else: return False
 
 # Checks to see if selected option is already taken 
-
 def istaken(user_input):
   if game_board[user_input] == "x" or game_board[user_input] =="o":
     return True
   else: return False
 
-# Updates board to X or Os 
+# Updates board to x or os 
 def update_board(user_input,active_user):
   game_board[user_input] = active_user
   counter
   return counter 
 
-# Switche users between X and O
+# Switches users between x and o
 def current_user(user):
   if user: return "x"
   else: return "o"
 
+# Gameboard selections are A1-C3 and transformed to numeric values
 def user_input_transform(user_input):
   conv_user_input = 10
   if user_input == 'A1':
@@ -91,6 +78,7 @@ def user_input_transform(user_input):
     conv_user_input = 9
   return conv_user_input
 
+# Checks to see if winner from Rows, Columns, or Diagonal
 def did_win(game_board,active_user):
     if check_win_row(game_board,active_user): 
       return True
@@ -100,6 +88,7 @@ def did_win(game_board,active_user):
       return True
     else:return False
 
+# Checks to see if any winners via row
 def check_win_row(game_board,active_user):
     if (game_board[0] == active_user and game_board[1] == active_user and game_board[2] == user): 
       return True
@@ -109,7 +98,7 @@ def check_win_row(game_board,active_user):
       return True
     else:
       return False
-
+# Checks to see if any winners via column
 def check_win_col(game_board,active_user):
     if (game_board[0] == active_user and game_board[3] == active_user and game_board[6] == active_user): 
       return True
@@ -120,11 +109,13 @@ def check_win_col(game_board,active_user):
     else:
       return False
 
+# Checks to see if any winners via Diagonal
 def check_diagonal(game_board,user):
     if (game_board[0]  == active_user and game_board[4]  == active_user and game_board[8]  == active_user): return True
     if (game_board[2]  == active_user and game_board[4]  == active_user and game_board[6]  == active_user): return True
     else: return False
 
+# Main game for TicTacToe
 while counter < 9:
   active_user = current_user(user)
   display_board()
