@@ -5,17 +5,20 @@
 user = True 
 counter = 0
 conv_user_input = 0
+conv_counter = 0
 
 game_board = ["-","-","-",
               "-","-","-",
               "-","-","-"] 
 
+# This will display board
 def display_board():
   print('  A   B   C')
   print("1 "+ game_board[0] +" | "+game_board[1] +" | "+ game_board[2])
   print("2 "+ game_board[3] +" | "+game_board[4] +" | "+ game_board[5])
   print("3 "+ game_board[6] +" | "+game_board[7] +" | "+ game_board[8])
 
+# This will clear all moves on board for new game
 def clear_board(game_board):
   for i in range(len(game_board)):
     game_board[i] = "-"
@@ -33,6 +36,7 @@ def isnumber(user_input):
     return False
   else:return True 
 
+# Checks to make sure inputs are within range of board 
 def check_boundary(user_input):
   if user_input >9 or user_input < 1:
     print("This is not a valid input.")
@@ -40,25 +44,30 @@ def check_boundary(user_input):
     return False
   else:return True
 
+# Ability to end game before winner or tie is achieved. 
 def quit(user_input):
   if user_input =="q": 
     print("Great Game. Thank you for playing.")
     return True
   else: return False
 
+# Checks to see if selected option is already taken 
+
 def istaken(user_input):
   if game_board[user_input] == "x" or game_board[user_input] =="o":
     return True
   else: return False
 
-def update_board(user_input,active_user,counter):
+# Updates board to X or Os 
+def update_board(user_input,active_user):
   game_board[user_input] = active_user
-  counter +=1
+  counter
   return counter 
-  
+
+# Switche users between X and O
 def current_user(user):
   if user: return "x"
-  else: return "0"
+  else: return "o"
 
 def user_input_transform(user_input):
   conv_user_input = 10
@@ -129,7 +138,7 @@ while counter < 9:
   if istaken(user_input):
     print("Space already taken. Please try again.")
     continue
-  update_board(user_input,active_user,counter)
+  update_board(user_input,active_user)
   if did_win(game_board,active_user):
     display_board()
     print(f'Player {active_user} has won!')
@@ -139,6 +148,7 @@ while counter < 9:
       clear_board(game_board)
     else: break
   user = not user
+  counter += 1
   if counter == 9:
     print('Tie!')
     user_input = input ('Do you want to play again ("y" or "n") ? ')
